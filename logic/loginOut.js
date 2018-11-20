@@ -20,7 +20,11 @@ x.in = async (req, res) => {
 
 		b.email = b.email.toLowerCase();
 
-		var data = await db.query(`SELECT * FROM accounts WHERE account = '${b.email}'`);
+		var q = {}
+			q.text = "SELECT * FROM accounts WHERE account = $1";
+			q.values = [b.email];
+
+		var data = await db.query(q);
 
 		var hash = crypto.createHash("sha256").update(b.password).digest("hex");
 		var savedHash = data.rows[0].password;
