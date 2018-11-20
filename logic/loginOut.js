@@ -20,7 +20,7 @@ x.in = async (req, res) => {
 
 		b.email = b.email.toLowerCase();
 
-		var q = {}
+		var q = {};
 			q.text = "SELECT * FROM accounts WHERE account = $1";
 			q.values = [b.email];
 
